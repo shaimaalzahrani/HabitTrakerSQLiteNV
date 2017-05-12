@@ -14,8 +14,9 @@ public class HabitTDBContract {
 
         /* Inner class that defines the table contents */
         public static class FeedEntry implements BaseColumns {
-            public static final String TABLE_NAME = "hapits";
+            public static final String TABLE_NAME = "Habit";
             public static final String COLUMN_NAME_ID = "id";
             public static final String COLUMN_NAME_NAME = "name";
+            public static final String COLUMN_NAME_STATUS = "status";
         }
 }

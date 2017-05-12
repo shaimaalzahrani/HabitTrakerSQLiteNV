@@ -18,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Inserting Rows
 
-        db.addHabit(new Habit("running"));
-        db.addHabit(new Habit("taking nap"));
-        db.addHabit(new Habit("calling my mother"));
-        db.addHabit(new Habit("Go to bed"));
+        db.addHabit(new Habit("running", 0));
+        db.addHabit(new Habit("taking nap", 1));
+        db.addHabit(new Habit("calling my mother" , 1));
+        db.addHabit(new Habit("Go to bed", 0));
 
         Log.d("Status: ", "values inserted");
 
@@ -30,7 +30,11 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Status: ", "List Created");
 
         for (Habit habit : habits) {
-            String outString = "Id: " + habit.getId() + " ,Name: " + habit.getName();
+            String status;
+            if(habit.getStatus() == 1){ status = "Done";}
+            else status = "Not Done";
+
+            String outString = "Id: " + habit.getId() + " ,Name: " + habit.getName() + " ,Status: " + status;
             // Writing shops  to log
             Log.d("Habit: : ", outString);
         }

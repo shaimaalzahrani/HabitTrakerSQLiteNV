@@ -17,7 +17,7 @@ import java.util.List;
 public class HabitTDBHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "HabitsDB.db";
+    public static final String DATABASE_NAME = "Habits.db";
 
     public HabitTDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -25,8 +25,9 @@ public class HabitTDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + HabitTDBContract.FeedEntry.TABLE_NAME + "("
-                + HabitTDBContract.FeedEntry.COLUMN_NAME_ID + " INTEGER PRIMARY KEY, " + HabitTDBContract.FeedEntry.COLUMN_NAME_NAME + " TEXT "
-                + ")";
+                + HabitTDBContract.FeedEntry.COLUMN_NAME_ID + " INTEGER PRIMARY KEY, "
+                + HabitTDBContract.FeedEntry.COLUMN_NAME_NAME + " TEXT, "
+                + HabitTDBContract.FeedEntry.COLUMN_NAME_STATUS + " INTEGER" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
@@ -45,6 +46,7 @@ public class HabitTDBHelper extends SQLiteOpenHelper {
         Log.d("Status: ", "after writable");
         ContentValues values = new ContentValues();
         values.put(HabitTDBContract.FeedEntry.COLUMN_NAME_NAME, habit.getName()); // habit Name
+        values.put(HabitTDBContract.FeedEntry.COLUMN_NAME_STATUS, habit.getStatus()); // habit Status
         Log.d("Status: ", "after value creation");
         // Inserting Row
         db.insert(HabitTDBContract.FeedEntry.TABLE_NAME, null, values);
@@ -67,6 +69,7 @@ public class HabitTDBHelper extends SQLiteOpenHelper {
                 Habit habit = new Habit();
                 habit.setId(Integer.parseInt(cursor.getString(0)));
                 habit.setName(cursor.getString(1));
+                habit.setSatus(cursor.getInt(2));
                 // Adding contact to list
                 habitList.add(habit);
             } while (cursor.moveToNext());
