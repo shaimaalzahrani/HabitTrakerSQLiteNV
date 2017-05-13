@@ -55,27 +55,14 @@ public class HabitTDBHelper extends SQLiteOpenHelper {
     }
 
     // Getting All Habits
-    public List<Habit> getAllHabits() {
-        List<Habit> habitList = new ArrayList<Habit>();
+    public Cursor getCursor() {
+
         // Select All Query
         String selectQuery = "SELECT  * FROM " + HabitTDBContract.FeedEntry.TABLE_NAME;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Habit habit = new Habit();
-                habit.setId(Integer.parseInt(cursor.getString(0)));
-                habit.setName(cursor.getString(1));
-                habit.setSatus(cursor.getInt(2));
-                // Adding contact to list
-                habitList.add(habit);
-            } while (cursor.moveToNext());
-        }
-
-        // return contact list
-        return habitList;
+        return cursor;
     }
 }
